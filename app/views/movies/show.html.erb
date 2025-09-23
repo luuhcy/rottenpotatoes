@@ -1,0 +1,14 @@
+<h1><%= @movie.title %></h1>
+
+<p>
+  <strong>Classificação:</strong>
+  <%= @movie.rating %>
+</p>
+
+<p>
+  <strong>Data de Lançamento:</strong>
+  <%= @movie.release_date %>
+</p>
+
+<%= link_to 'Editar', edit_movie_path(@movie) %> |
+<%= link_to 'Voltar', movies_path %>
