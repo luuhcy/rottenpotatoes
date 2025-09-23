@@ -23,7 +23,14 @@
           <td>
             <%= link_to "Mostrar", movie_path(movie) %> |
             <%= link_to "Editar", edit_movie_path(movie, sort: params[:sort]) %> |
-            <%= link_to "Excluir", movie_path(movie, sort: params[:sort]), method: :delete, data: { confirm: "Tem certeza?" } %>
+
+            <!-- Formulário manual para excluir com confirmação -->
+            <form action="<%= movie_path(movie) %>" method="post" onsubmit="return confirm('Tem certeza?');" style="display:inline;">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Excluir">
+            </form>
+
           </td>
         </tr>
       <% end %>

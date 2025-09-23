@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
       # Ordena os filmes de acordo com o parâmetro
       @movies = case sort_by
                 when 'title'
-                  Movie.order(:title)
+                  Movie.order("LOWER(title) ASC")
                 when 'release_date'
                   Movie.order(:release_date)
                 else
@@ -44,9 +44,10 @@ class MoviesController < ApplicationController
     end
   
     def destroy
-      @movie.destroy
-      redirect_to movies_path(sort: params[:sort]), notice: "Filme excluído com sucesso!"
-    end
+        @movie.destroy
+        redirect_to movies_path, notice: "Filme excluído com sucesso!"
+      end
+      
   
     private
   

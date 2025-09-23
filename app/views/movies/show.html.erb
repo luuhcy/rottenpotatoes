@@ -11,4 +11,15 @@
 </p>
 
 <%= link_to 'Editar', edit_movie_path(@movie) %> |
-<%= link_to 'Voltar', movies_path %>
+<%= link_to 'Voltar', movies_path %> |
+
+<!-- Formulário manual para excluir com confirmação -->
+<form action="<%= movie_path(@movie) %>" method="post" onsubmit="return confirm('Tem certeza?');" style="display:inline;">
+  <!-- Token CSRF obrigatório -->
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  
+  <!-- Método DELETE -->
+  <input type="hidden" name="_method" value="delete">
+  
+  <input type="submit" value="Excluir">
+</form>
