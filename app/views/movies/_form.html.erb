@@ -1,7 +1,7 @@
-<%= form_with(model: @movie) do |form| %>
+<%= form_with(model: @movie, local: true) do |form| %>
     <% if @movie.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@movie.errors.count, "error") %> proibiu este filme de ser salvo:</h2>
+        <h2><%= pluralize(@movie.errors.count, "erro") %> proibiu este filme de ser salvo:</h2>
         <ul>
           <% @movie.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -10,23 +10,23 @@
       </div>
     <% end %>
   
-    <p>
-      <%= form.label :title %><br>
+    <div>
+      <%= form.label :title, "Título" %><br>
       <%= form.text_field :title %>
-    </p>
+    </div>
   
-    <p>
-      <%= form.label :rating %><br>
+    <div>
+      <%= form.label :rating, "Classificação" %><br>
       <%= form.text_field :rating %>
-    </p>
+    </div>
   
-    <p>
-      <%= form.label :release_date %><br>
-      <%= form.date_select :release_date %>
-    </p>
+    <div>
+      <%= form.label :release_date, "Data de Lançamento" %><br>
+      <%= form.date_field :release_date %>
+    </div>
   
-    <p>
+    <div>
       <%= form.submit %>
-    </p>
+    </div>
   <% end %>
   

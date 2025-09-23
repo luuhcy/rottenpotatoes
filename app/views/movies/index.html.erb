@@ -1,28 +1,40 @@
-<h1>Filmes</h1>
-
-<%= link_to 'Novo Filme', new_movie_path %>
+<h1>Lista de Filmes</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Título</th>
+      <th id="title_header" class="<%= 'hilite' if params[:sort] == 'title' %>">
+        <%= link_to "Título", movies_path(sort: 'title') %>
+      </th>
       <th>Classificação</th>
-      <th>Data de Lançamento</th>
+      <th id="release_date_header" class="<%= 'hilite' if params[:sort] == 'release_date' %>">
+        <%= link_to "Data de Lançamento", movies_path(sort: 'release_date') %>
+      </th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
-    <% @movies.each do |movie| %>
+    <% if @movies.present? %>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.rating %></td>
+          <td><%= movie.release_date %></td>
+          <td>
+            <%= link_to "Mostrar", movie_path(movie) %> |
+            <%= link_to "Editar", edit_movie_path(movie, sort: params[:sort]) %> |
+            <%= link_to "Excluir", movie_path(movie, sort: params[:sort]), method: :delete, data: { confirm: "Tem certeza?" } %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.release_date %></td>
-        <td>
-          <%= link_to 'Mostrar', movie_path(movie) %> |
-          <%= link_to 'Editar', edit_movie_path(movie) %> |
-          <%= link_to 'Excluir', movie_path(movie), method: :delete, data: { confirm: 'Tem certeza?' } %>
-        </td>
+        <td colspan="4">Nenhum filme encontrado.</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br>
+
+<%= link_to "Adicionar Novo Filme", new_movie_path(sort: params[:sort]) %>
