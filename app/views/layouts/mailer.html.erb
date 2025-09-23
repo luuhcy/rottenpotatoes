@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<thead>
+  <tr>
+    <th class="<%= 'hilite' if params[:sort] == 'title' %>">
+      <%= link_to 'Movie Title', movies_path(sort: 'title'), id: :title_header %>
+    </th>
+    <th>Rating</th>
+    <th class="<%= 'hilite' if params[:sort] == 'release_date' %>">
+      <%= link_to 'Release Date', movies_path(sort: 'release_date'), id: :release_date_header %>
+    </th>
+    <th colspan="3"></th>
+  </tr>
+</thead>
+
 
   <body>
     <%= yield %>
